@@ -11,6 +11,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 
+import { HomeScreen } from './screens/HomeScreen';
+import { DetailsScreen } from './screens/DetailsScreen';
+import { RegistryScreen } from './screens/RegistryScreen';
+
 const accentColour = '#00A896';
 const backgroundColour = '#2C2F33';
 const defaultFont = 'Monserrat';
@@ -22,78 +26,9 @@ TODO: Make custom buttons
 TODO: Better names for styling and more centralized colour palettes
 TODO: Icons in the textInput bars
 TODO: Data sensitivity policy
+TODO: Themes
 ! REMOVE INLINE STYLING
 */
-
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-
-      <Button
-        title="Register"
-        onPress={() => navigation.navigate('Register')}
-      />
-    </View>
-  );
-}
-
-function DetailsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-    </View>
-  );
-}
-
-function RegistryScreen() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.mainContainerBlock}>
-        <Text style={styles.titleText}>Trash 4 Cash</Text>
-        <Text style={styles.defaultText}>Account aanmaken</Text>
-        <TextInput
-          style={styles.userTextInput}
-          placeholder="Email"
-          placeholderTextColor={accentColour}
-          color={accentColour}
-        />
-
-        <TextInput
-          style={styles.userTextInput}
-          placeholder="Name"
-          placeholderTextColor={accentColour}
-          color={accentColour}
-        />
-
-        <TextInput
-          style={styles.userTextInput}
-          placeholder="Username"
-          placeholderTextColor={accentColour}
-          color={accentColour}
-        />
-
-        <TextInput
-          style={styles.userTextInput}
-          placeholder="Password"
-          placeholderTextColor={accentColour}
-          color={accentColour}
-        />
-
-        <Pressable
-          style={styles.pressableButton}
-          onPress={() => alert('User account successfully registered.')}
-        >
-          <Text>Create account</Text>
-        </Pressable>
-      </View>
-    </View>
-  );
-}
 
 const Stack = createNativeStackNavigator();
 
