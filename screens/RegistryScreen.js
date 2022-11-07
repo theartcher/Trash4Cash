@@ -2,10 +2,6 @@ import * as React from 'react';
 import { View, Text, TextInput, Pressable } from 'react-native';
 const styles = require('../styling');
 
-const accentColour = '#00A896';
-const backgroundColour = '#2C2F33';
-const defaultFont = 'Monserrat';
-
 export function RegistryScreen() {
   return (
     <View style={styles.container}>
@@ -15,29 +11,29 @@ export function RegistryScreen() {
         <TextInput
           style={styles.userTextInput}
           placeholder="Email"
-          placeholderTextColor={accentColour}
-          color={accentColour}
+          placeholderTextColor={globalColours.accentColour}
+          color={globalColours.accentColour}
         />
 
         <TextInput
           style={styles.userTextInput}
           placeholder="Name"
-          placeholderTextColor={accentColour}
-          color={accentColour}
+          placeholderTextColor={globalColours.accentColour}
+          color={globalColours.accentColour}
         />
 
         <TextInput
           style={styles.userTextInput}
           placeholder="Username"
-          placeholderTextColor={accentColour}
-          color={accentColour}
+          placeholderTextColor={globalColours.accentColour}
+          color={globalColours.accentColour}
         />
 
         <TextInput
           style={styles.userTextInput}
           placeholder="Password"
-          placeholderTextColor={accentColour}
-          color={accentColour}
+          placeholderTextColor={globalColours.accentColour}
+          color={globalColours.accentColour}
         />
 
         <Pressable

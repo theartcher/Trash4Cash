@@ -1,23 +1,12 @@
 import { StyleSheet } from 'react-native';
 
-// Testing feature, ignore.
-// module.exports = {
-//   accentColour: '#00A896',
-//   backgroundColour: '#2C2F33',
-//   defaultFont: 'Monserrat',
-// };
-
-const accentColour = '#00A896';
-const backgroundColour = '#2C2F33';
-const defaultFont = 'Monserrat';
-
 module.exports = StyleSheet.create({
   mainContainerBlock: {
     padding: 10,
     borderRadius: 5,
     width: '90%',
     height: '98%',
-    backgroundColor: backgroundColour,
+    backgroundColor: globalColours.backgroundColour,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -25,7 +14,7 @@ module.exports = StyleSheet.create({
   container: {
     flex: 1,
     padding: 5,
-    backgroundColor: accentColour,
+    backgroundColor: globalColours.accentColour,
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -35,11 +24,11 @@ module.exports = StyleSheet.create({
     color: 'white',
     padding: 10,
     fontSize: 40,
-    fontFamily: defaultFont,
+    fontFamily: globalColours.defaultFont,
     fontWeight: 'bold',
   },
   defaultText: {
-    fontFamily: defaultFont,
+    fontFamily: globalColours.defaultFont,
     color: 'white',
     fontSize: 20,
     textAlign: 'left',
@@ -57,7 +46,7 @@ module.exports = StyleSheet.create({
     textColor: 'white',
   },
   pressableButton: {
-    backgroundColor: accentColour,
+    backgroundColor: globalColours.accentColour,
     borderWidth: 0,
     borderRadius: 5,
     margin: 10,

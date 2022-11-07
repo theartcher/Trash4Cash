@@ -7,17 +7,6 @@ import { HomeScreen } from './screens/HomeScreen';
 import { DetailsScreen } from './screens/DetailsScreen';
 import { RegistryScreen } from './screens/RegistryScreen';
 
-/*
-TODO: Separate styling to it's own CSS file -> DONE
-TODO: Separate screens into assets/screens/*  -> DONE CHOSE FOR ../styling.js
-TODO: Make custom buttons -> DONE
-TODO: Better names for styling and more centralized colour palettes
-TODO: Icons in the textInput bars
-TODO: Data sensitivity policy
-TODO: Themes
-! REMOVE INLINE STYLING
-*/
-
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -38,3 +27,14 @@ function App() {
 }
 
 export default App;
+
+/*
+TODO: Separate styling to it's own CSS file -> DONE
+TODO: Separate screens into assets/screens/*  -> DONE CHOSE FOR ../styling.js
+TODO: Make custom buttons -> DONE
+TODO: Better names for styling and more centralized colour palettes
+TODO: Icons in the textInput bars
+TODO: Data sensitivity policy
+TODO: Themes
+! REMOVE INLINE STYLING
+*/
