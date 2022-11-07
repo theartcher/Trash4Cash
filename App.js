@@ -13,11 +13,15 @@ import { useFonts } from 'expo-font';
 
 const accentColour = '#00A896';
 const backgroundColour = '#2C2F33';
+const defaultFont = 'Monserrat';
 
 /*
 TODO: Separate styling to it's own CSS file
+TODO: Separate screens into assets/screens/*
 TODO: Make custom buttons
 TODO: Better names for styling and more centralized colour palettes
+TODO: Icons in the textInput bars
+TODO: Data sensitivity policy
 ! REMOVE INLINE STYLING
 */
 
@@ -135,11 +139,11 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 10,
     fontSize: 40,
-    fontFamily: 'Monserrat',
+    fontFamily: defaultFont,
     fontWeight: 'bold',
   },
   defaultText: {
-    fontFamily: 'Monserrat',
+    fontFamily: defaultFont,
     color: 'white',
     fontSize: 20,
     textAlign: 'left',
@@ -151,8 +155,8 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderWidth: 0.75,
     borderRadius: 5,
-    height: '10%',
-    width: '80%',
+    height: '7%',
+    width: '65%',
     fontStyle: 'italic',
     textColor: 'white',
   },
