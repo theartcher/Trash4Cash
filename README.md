@@ -20,3 +20,4 @@ This is mainly made for the subject 'software' with help of the subject 'media &
 ### Credits
 
 Software development, version management and leading role: Joris A. Brugman
+App look, branding and design: Hakan Çoban
