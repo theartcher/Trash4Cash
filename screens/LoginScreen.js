@@ -1,31 +1,20 @@
 import * as React from 'react';
 import { View, Text, TextInput, Pressable, Image, Linking } from 'react-native';
+import { CheckBox } from '@rneui/themed';
 import globalColours from '../globalColours';
-const globalStyles = require('../styling/globalStyling');
-const pageStyles = require('../styling/registryStyling');
+const pageStyles = require('../styling/loginStyling');
 
-export function RegistryScreen() {
+export function LoginScreen() {
   return (
     <View style={pageStyles.container}>
       <View style={pageStyles.secondaryContainer}>
-        <Text style={pageStyles.titleText}>Sign Up</Text>
+        <Text style={pageStyles.titleText}>Sign In</Text>
         <Text style={pageStyles.defaultSpacedText}>
-           Already an user?
-          <Text style={{ color: globalColours.lightSeaGreen }}> Sign In</Text>
+          New User?
+          <Text style={{ color: globalColours.lightSeaGreen }}>
+             Create an account
+          </Text>
         </Text>
-        <TextInput
-          style={pageStyles.userTextInput}
-          placeholder="First Name"
-          placeholderTextColor={globalColours.dark}
-          color={globalColours.dark}
-        />
-
-        <TextInput
-          style={pageStyles.userTextInput}
-          placeholder="Last name"
-          placeholderTextColor={globalColours.dark}
-          color={globalColours.dark}
-        />
 
         <TextInput
           style={pageStyles.userTextInput}
@@ -40,17 +29,17 @@ export function RegistryScreen() {
           placeholderTextColor={globalColours.dark}
           color={globalColours.dark}
         />
-
+        <CheckBox style={pageStyles.checkBox} title="Keep me signed in" />
         <Pressable
           style={pageStyles.pressableButton}
-          onPress={() => checkRegistered('Joris@toqira.nl', 'JoriBori04')}
+          onPress={() => alert('User account successfully registered.')}
         >
-          <Text style={pageStyles.pressableButton.textButton}>Sign Up</Text>
+          <Text style={pageStyles.pressableButton.textButton}>Sign In</Text>
         </Pressable>
 
         <View style={pageStyles.signInWith}>
           <View style={pageStyles.smallDivider} />
-          <Text style={pageStyles.defaultSpacedText}>Or Sign Up With</Text>
+          <Text style={pageStyles.defaultSpacedText}>Or Sign In With</Text>
           <View style={pageStyles.smallDivider} />
         </View>
 

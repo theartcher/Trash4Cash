@@ -1,4 +1,4 @@
-export default globalColours = {
+export default {
   defaultFont: 'Monserrat',
   lightSeaGreen: '#38a3a5',
   mediumAquaMarine: '#57cc99',
