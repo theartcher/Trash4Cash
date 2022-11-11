@@ -3,6 +3,11 @@ import { View, Text, TextInput, Pressable, Image, Linking } from 'react-native';
 import globalColours from '../globalColours';
 const globalStyles = require('../styling/globalStyling');
 const pageStyles = require('../styling/registryStyling');
+import {
+  checkRegistered,
+  createAccount,
+  isPasswordStrong,
+} from '../databaseManager';
 
 export function RegistryScreen() {
   return (
@@ -19,36 +24,34 @@ export function RegistryScreen() {
           placeholderTextColor={globalColours.dark}
           color={globalColours.dark}
         />
-
         <TextInput
           style={pageStyles.userTextInput}
           placeholder="Last name"
           placeholderTextColor={globalColours.dark}
           color={globalColours.dark}
         />
-
         <TextInput
           style={pageStyles.userTextInput}
           placeholder="Username or email"
           placeholderTextColor={globalColours.dark}
           color={globalColours.dark}
         />
-
         <TextInput
           style={pageStyles.userTextInput}
           placeholder="Password"
           placeholderTextColor={globalColours.dark}
           color={globalColours.dark}
         />
-
         <Pressable
           style={pageStyles.pressableButton}
-          onPress={() => checkRegistered('Joris@toqira.nl', 'JoriBori04')}
+          onPress={() => {
+            checkRegistered('Joris@toqira.nl', 'JoriBori04');
+          }}
         >
           <Text style={pageStyles.pressableButton.textButton}>Sign Up</Text>
         </Pressable>
 
-        <View style={pageStyles.signInWith}>
+        {/* <View style={pageStyles.signInWith}>
           <View style={pageStyles.smallDivider} />
           <Text style={pageStyles.defaultSpacedText}>Or Sign Up With</Text>
           <View style={pageStyles.smallDivider} />
@@ -99,7 +102,7 @@ export function RegistryScreen() {
               style={pageStyles.socialMediaIcon}
             />
           </Pressable>
-        </View>
+        </View> */}
       </View>
     </View>
   );
