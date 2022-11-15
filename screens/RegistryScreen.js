@@ -1,109 +1,126 @@
 import * as React from 'react';
-import { View, Text, TextInput, Pressable, Image, Linking } from 'react-native';
+import { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Image,
+  Linking,
+  Alert,
+} from 'react-native';
 import globalColours from '../globalColours';
 const globalStyles = require('../styling/globalStyling');
 const pageStyles = require('../styling/registryStyling');
-import {
-  checkRegistered,
-  createAccount,
-  isPasswordStrong,
-} from '../databaseManager';
+import axios from 'axios';
 
-export function RegistryScreen() {
+function checkBoxed() {}
+
+export function RegistryScreen({ navigation }) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+
   return (
     <View style={pageStyles.container}>
       <View style={pageStyles.secondaryContainer}>
         <Text style={pageStyles.titleText}>Sign Up</Text>
         <Text style={pageStyles.defaultSpacedText}>
            Already an user?
-          <Text style={{ color: globalColours.lightSeaGreen }}> Sign In</Text>
+          <Text
+            style={{ color: globalColours.lightSeaGreen }}
+            onPress={() => navigation.navigate('Login')}
+          >
+             Sign In
+          </Text>
         </Text>
         <TextInput
           style={pageStyles.userTextInput}
-          placeholder="First Name"
+          placeholder="First name"
           placeholderTextColor={globalColours.dark}
-          color={globalColours.dark}
+          onChangeText={(value) => setFirstName(value)}
         />
         <TextInput
           style={pageStyles.userTextInput}
           placeholder="Last name"
           placeholderTextColor={globalColours.dark}
-          color={globalColours.dark}
+          onChangeText={(value) => setLastName(value)}
         />
         <TextInput
           style={pageStyles.userTextInput}
-          placeholder="Username or email"
+          placeholder="Username"
           placeholderTextColor={globalColours.dark}
-          color={globalColours.dark}
+          onChangeText={(value) => setUsername(value)}
+        />
+        <TextInput
+          style={pageStyles.userTextInput}
+          placeholder="Email"
+          placeholderTextColor={globalColours.dark}
+          keyboardType="email-address"
+          onChangeText={(value) => setEmail(value)}
         />
         <TextInput
           style={pageStyles.userTextInput}
           placeholder="Password"
           placeholderTextColor={globalColours.dark}
-          color={globalColours.dark}
+          secureTextEntry={true}
+          onChangeText={(value) => setPassword(value)}
         />
         <Pressable
           style={pageStyles.pressableButton}
-          onPress={() => {
-            checkRegistered('Joris@toqira.nl', 'JoriBori04');
+          onPress={async () => {
+            const url = 'http://alpha.cubes.host:25577/api/user';
+            const apiInputData = {
+              id: 999,
+              firstName: `${firstName}`,
+              lastName: `${lastName}`,
+              email: `${email}`,
+              password: `${password}`,
+              username: `${username}`,
+              registeredCity: 'Eindhoven',
+            };
+            axios
+              .post(url, apiInputData, {
+                headers: {
+                  Accept: '*/*',
+                  'Content-Type': 'application/json;charset=UTF-8',
+                },
+              })
+              .then(({ data }) => {
+                console.log(data);
+              })
+              .catch((error) => console.log('error: ', error));
           }}
         >
           <Text style={pageStyles.pressableButton.textButton}>Sign Up</Text>
         </Pressable>
-
-        {/* <View style={pageStyles.signInWith}>
-          <View style={pageStyles.smallDivider} />
-          <Text style={pageStyles.defaultSpacedText}>Or Sign Up With</Text>
-          <View style={pageStyles.smallDivider} />
-        </View>
-
-        <View style={pageStyles.socialMediaButton}>
-          <Pressable
-            style={pageStyles.socialMediaButton}
-            onPress={() => Linking.openURL('https://www.linkedin.com/login/nl')}
-          >
-            <Image
-              source={require('../assets/icons/white_linkedin_logo.png')}
-              style={pageStyles.socialMediaIcon}
-            />
-          </Pressable>
-
-          <Pressable
-            style={pageStyles.socialMediaButton}
-            onPress={() => Linking.openURL('https://nl-nl.facebook.com/')}
-          >
-            <Image
-              source={require('../assets/icons/white_facebook_logo.png')}
-              style={pageStyles.socialMediaIcon}
-            />
-          </Pressable>
-
-          <View style={pageStyles.socialMediaButton}>
-            <Pressable
-              style={pageStyles.socialMediaButton}
-              onPress={() =>
-                Linking.openURL('https://twitter.com/i/flow/login')
-              }
-            >
-              <Image
-                source={require('../assets/icons/white_twitter_logo.png')}
-                style={pageStyles.socialMediaIcon}
-              />
-            </Pressable>
-          </View>
-
-          <Pressable
-            onPress={() =>
-              Linking.openURL('https://www.instagram.com/accounts/login/')
-            }
-          >
-            <Image
-              source={require('../assets/icons/white_instagram_logo.png')}
-              style={pageStyles.socialMediaIcon}
-            />
-          </Pressable>
-        </View> */}
       </View>
     </View>
   );
 }
+
+//  onPress={async () => {
+//             const url = 'http://alpha.cubes.host:25577/api/user';
+//             const apiInputData = {
+//               id: 999,
+//               firstName: 'Bart',
+//               lastName: 'Jaap',
+//               email: 'jorisplayz@gmail.com',
+//               password: 'aap123',
+//               username: 'aap123',
+//               registeredCity: 'Amsterdam',
+//             };
+//             axios
+//               .post(url, apiInputData, {
+//                 headers: {
+//                   Accept: '*/*',
+//                   'Content-Type': 'application/json;charset=UTF-8',
+//                 },
+//               })
+//               .then(({ data }) => {
+//                 console.log(data);
+//               })
+//               .catch((error) => console.log('error: ', error));
+//           }}

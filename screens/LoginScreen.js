@@ -4,14 +4,17 @@ import { CheckBox } from '@rneui/themed';
 import globalColours from '../globalColours';
 const pageStyles = require('../styling/loginStyling');
 
-export function LoginScreen() {
+export function LoginScreen({ navigation }) {
   return (
     <View style={pageStyles.container}>
       <View style={pageStyles.secondaryContainer}>
         <Text style={pageStyles.titleText}>Sign In</Text>
         <Text style={pageStyles.defaultSpacedText}>
           New User?
-          <Text style={{ color: globalColours.lightSeaGreen }}>
+          <Text
+            style={{ color: globalColours.lightSeaGreen }}
+            onPress={() => navigation.navigate('Register')}
+          >
              Create an account
           </Text>
         </Text>
