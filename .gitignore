@@ -1,5 +1,6 @@
 /.expo
 /node_modules
 /.expo-shared
+/config.json
 /assets
 /api/node_modules

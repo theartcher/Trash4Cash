@@ -1,4 +1,5 @@
 # Trash4Cash - A Fontys project
+
 ![Trash 4 Cash without Logo](https://user-images.githubusercontent.com/57297314/202594313-e1be0708-a59a-47ce-9cfc-6b456a0b2aab.png)
 
 In this project the intention was to work with other junior developers to make a useful and sustainable project. This was done using
@@ -23,4 +24,4 @@ This is mainly made for the subject 'software' with help of the subject 'media &
 ### Credits
 
 Software development, version management and leading role: Joris A. Brugman
-Design and look: Hakan Çoban
+App look, branding and design: Hakan Çoban
