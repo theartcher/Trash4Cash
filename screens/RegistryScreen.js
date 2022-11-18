@@ -73,7 +73,6 @@ export function RegistryScreen({ navigation }) {
           onPress={async () => {
             const url = 'http://alpha.cubes.host:25577/api/user';
             const apiInputData = {
-              id: 999,
               firstName: `${firstName}`,
               lastName: `${lastName}`,
               email: `${email}`,

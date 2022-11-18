@@ -1,8 +1,8 @@
-const { Sequelize, DataTypes, Model, QueryTypes } = require("sequelize");
-const config = require("../Trash4Cash/Trash4Cash/config.json");
+const { Sequelize, DataTypes, Model, QueryTypes } = require('sequelize');
+const config = require('../config.json');
 
-const cors = require("cors");
-const express = require("express");
+const cors = require('cors');
+const express = require('express');
 const app = express();
 
 app.use(express.json());
@@ -10,6 +10,7 @@ app.use(express.json());
 //TODO: Add textinput fields
 //TODO: Add signin feature
 //TODO: check if password is strong enough
+//TODO: Centralize 'Trash4Cash' table name
 
 //Configure sensitive variables from config.json
 const sequelize = new Sequelize(
@@ -19,16 +20,16 @@ const sequelize = new Sequelize(
   {
     host: config.MYSQL_HOST,
     port: config.MYSQL_PORT,
-    dialect: "mysql",
+    dialect: 'mysql',
   }
 );
 
 //Attempt to execute 'SELECT 1+1 AS RESULT' as a test.
 try {
   sequelize.authenticate();
-  console.log("\n Connection has been established successfully. \n");
+  console.log('\n Connection has been established successfully. \n');
 } catch (error) {
-  console.error("Unable to connect to the database:", error);
+  console.error('Unable to connect to the database:', error);
 }
 
 //Define table and column types
@@ -86,18 +87,24 @@ trash4cash.init(
   {
     freezeTableName: true,
     sequelize,
-    modelName: "trash4cash",
-    tableName: "trash4cash",
+    modelName: 'trash4cash',
+    tableName: 'trash4cash',
     timestamps: false,
   }
 );
+
+async function createNewID() {
+  const highestID = await trash4cash.max('id');
+  const newID = Number(highestID) + 1;
+  return newID;
+}
 
 //Check if an there is an account associated with email OR username
 async function checkRegistered(email, username) {
   try {
     const parameters = [email, username];
     const results = await sequelize.query(
-      "SELECT * FROM trash4cash WHERE email = ? OR username = ?",
+      'SELECT * FROM trash4cash WHERE email = ? OR username = ?',
       {
         type: QueryTypes.SELECT,
         replacements: parameters,
@@ -105,19 +112,19 @@ async function checkRegistered(email, username) {
     );
     if (results.length == 0) {
       console.log(
-        "\nAccount NOT found with email " + email,
-        "or username " + username + "\n"
+        '\nAccount NOT found with email ' + email,
+        'or username ' + username + '\n'
       );
       return false;
     } else if (results.length != 0) {
       console.log(
-        "\nAccount found with either email " + email,
-        "or username " + username + "\n"
+        '\nAccount found with either email ' + email,
+        'or username ' + username + '\n'
       );
       return true;
     }
   } catch (error) {
-    console.log("An error occurred: " + error);
+    console.log('An error occurred: ' + error);
   }
 }
 
@@ -153,15 +160,15 @@ function isPasswordStrong(password) {
 }
 
 //Default READ handler
-app.get("/", cors((origin = "*")), (req, res) => {
-  res.send("Read request handled.");
+app.get('/', cors((origin = '*')), (req, res) => {
+  res.send('Read request handled.');
 });
 
 // Check if a username/email already exists in database
-app.get("/api/user", async (req, res) => {
+app.get('/api/user', async (req, res) => {
   if (!Object.keys(req.body).length) {
     return res.status(400).json({
-      message: "Request body cannot be empty",
+      message: 'Request body cannot be empty',
     });
   }
 
@@ -169,30 +176,31 @@ app.get("/api/user", async (req, res) => {
   const results = await checkRegistered(email, username);
   res.send(results);
   console.log(
-    "\n = Fetched using this data =\n" + email + "\n" + username + "\n"
+    '\n = Fetched using this data =\n' + email + '\n' + username + '\n'
   );
 });
 
 //Return checks if user OR email exist in database, if not makes new account
-app.post("/api/user", cors(), async (req, res) => {
+app.post('/api/user', cors(), async (req, res) => {
   if (!Object.keys(req.body).length) {
     return res.status(400).json({
-      message: "Request body cannot be empty",
+      message: 'Request body cannot be empty',
     });
   }
 
-  const { id, firstName, lastName, email, password, username, registeredCity } =
+  const { firstName, lastName, email, password, username, registeredCity } =
     req.body;
   const bottlesSaved = 0;
   const credits = 0;
   const userExists = await checkRegistered(email, username);
 
   if (userExists === true) {
-    res.send("Error: Username or email already registered.");
+    res.send('Error: Username or email already registered.');
   }
   if (userExists === false) {
     if (isPasswordStrong(password) === true) {
       try {
+        const id = await createNewID();
         await trash4cash.create({
           id: id,
           firstName: firstName,
@@ -206,18 +214,18 @@ app.post("/api/user", cors(), async (req, res) => {
           type: QueryTypes.INSERT,
         });
         console.log(
-          "\nUser successfully injected with email " + email,
-          "And username " + username + "\n"
+          '\nUser successfully injected with email ' + email,
+          'And username ' + username + '\n'
         );
-        res.send(JSON.stringify("Successfully created user."));
+        res.send(JSON.stringify('Successfully created user.'));
       } catch (err) {
-        res.send(JSON.stringify("Something went wrong."));
+        res.send(JSON.stringify('Something went wrong.'));
         console.log(err);
       }
     } else if (isPasswordStrong(password) === false) {
       res.send(
         JSON.stringify(
-          "Password not sufficient, must have 1 special character, 1 capital letter, 1 lowercase letter, 1 number and must be  between 10 and 20 characters long."
+          'Password not sufficient, must have 1 special character, 1 capital letter, 1 lowercase letter, 1 number and must be  between 10 and 20 characters long.'
         )
       );
     }
@@ -233,5 +241,5 @@ app.post("/api/user", cors(), async (req, res) => {
 // });
 
 //Assign port and log it to console
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 7070;
 app.listen(port, () => console.log(`Listening on port ${port}..`));
