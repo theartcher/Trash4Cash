@@ -1,0 +1,7 @@
+{
+  "MYSQLPASSWORD": "Test123",
+  "MYSQLUSERNAME": "joris",
+  "MYSQLDATABASE": "Trash4Cash",
+  "MYSQL_HOST": "192.168.236.111",
+  "MYSQL_PORT": "3306"
+}
