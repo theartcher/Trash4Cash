@@ -15,7 +15,7 @@ app.use(express.json());
 //Configure sensitive variables from config.json
 const sequelize = new Sequelize(
   config.MYSQLDATABASE,
-  config.MYSQL_USERNAME,
+  config.MYSQLUSERNAME,
   config.MYSQLPASSWORD,
   {
     host: config.MYSQL_HOST,
@@ -128,6 +128,36 @@ async function checkRegistered(email, username) {
   }
 }
 
+async function checkLogin(email, username, password) {
+  try {
+    const parameters = [email, username, password];
+    const results = await sequelize.query(
+      'SELECT * FROM trash4cash WHERE email = ? OR username = ? AND password = ?',
+      {
+        type: QueryTypes.SELECT,
+        replacements: parameters,
+      }
+    );
+    if (results.length == 0) {
+      console.log(
+        '\n  = INVALID = \n' + 'email: ' + email,
+        +' username: ' + username,
+        +' password: ' + password + '\n'
+      );
+      return false;
+    } else if (results.length != 0) {
+      console.log(
+        '\n  = VALID = \n' + 'email: ' + email,
+        +' username: ' + username,
+        +' password: ' + password + '\n'
+      );
+      return true;
+    }
+  } catch (error) {
+    console.log('An error occurred: ' + error);
+  }
+}
+
 function isPasswordStrong(password) {
   let passwordStrength = {
     hasCapitalLetters: false,
@@ -160,7 +190,7 @@ function isPasswordStrong(password) {
 }
 
 //Default READ handler
-app.get('/', cors((origin = '*')), (req, res) => {
+app.get('/', cors(), (req, res) => {
   res.send('Read request handled.');
 });
 
@@ -177,6 +207,15 @@ app.get('/api/user', async (req, res) => {
   res.send(results);
   console.log(
     '\n = Fetched using this data =\n' + email + '\n' + username + '\n'
+  );
+});
+
+app.post('/api/login', cors(), async (req, res) => {
+  const { email, username, password } = req.body;
+  const results = await checkLogin(email, username, password);
+  res.send(JSON.stringify(results));
+  console.log(
+    '\n = Login using this data =\n' + email + '\n' + username + '\n'
   );
 });
 

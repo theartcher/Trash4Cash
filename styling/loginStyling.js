@@ -52,7 +52,7 @@ module.exports = StyleSheet.create({
     height: '8%',
     width: '85%',
     fontWeight: '200',
-    color: globalColours.light,
+    color: globalColours.black,
   },
   pressableButton: {
     alignSelf: 'center',
